@@ -1,0 +1,91 @@
+@layer components {
+    .btn-neon-cyan {
+        @apply text-sm font-bold tracking-widest uppercase px-6 py-2 border transition-all duration-300 cursor-pointer;
+        font-family: "Orbitron", monospace;
+        color: #00f5ff;
+        border-color: #00f5ff;
+        background: transparent;
+        box-shadow: 0 0 5px #00f5ff, inset 0 0 5px rgba(0, 245, 255, 0.05);
+    }
+
+    .btn-neon-cyan:hover {
+        background: #00f5ff;
+        color: #050508;
+        box-shadow: 0 0 20px #00f5ff, 0 0 40px #00f5ff, inset 0 0 10px rgba(0, 245, 255, 0.3);
+        transform: translateY(-2px);
+    }
+
+    .btn-neon-pink {
+        @apply text-sm font-bold tracking-widest uppercase px-6 py-2 border transition-all duration-300 cursor-pointer;
+        font-family: "Orbitron", monospace;
+        color: #ff006e;
+        border-color: #ff006e;
+        background: transparent;
+        box-shadow: 0 0 5px #ff006e, inset 0 0 5px rgba(255, 0, 110, 0.05);
+    }
+
+    .btn-neon-pink:hover {
+        background: #ff006e;
+        color: #050508;
+        box-shadow: 0 0 20px #ff006e, 0 0 40px #ff006e;
+        transform: translateY(-2px);
+    }
+
+    .btn-neon-red {
+        @apply text-sm font-bold tracking-widest uppercase px-4 py-2 border transition-all duration-300 cursor-pointer;
+        font-family: "Orbitron", monospace;
+        color: #ff3333;
+        border-color: #ff3333;
+        background: transparent;
+        box-shadow: 0 0 5px #ff3333;
+    }
+
+    .btn-neon-red:hover {
+        background: #ff3333;
+        color: #050508;
+        box-shadow: 0 0 20px #ff3333;
+        transform: translateY(-2px);
+    }
+
+    .retro-card {
+        @apply relative border transition-all duration-300 overflow-hidden;
+        background: #0f0f1a;
+        border-color: rgba(0, 245, 255, 0.2);
+    }
+
+    .retro-card:hover {
+        border-color: #00f5ff;
+        box-shadow: 0 0 15px rgba(0, 245, 255, 0.3), 0 0 30px rgba(0, 245, 255, 0.1);
+        transform: translateY(-4px);
+    }
+
+    .retro-input {
+        @apply w-full border px-4 py-3 text-gray-200 transition-all duration-300 outline-none;
+        background: #0a0a12;
+        font-family: "Share Tech Mono", monospace;
+        border-color: rgba(0, 245, 255, 0.3);
+    }
+
+    .retro-input:focus {
+        border-color: #00f5ff;
+        box-shadow: 0 0 10px rgba(0, 245, 255, 0.3);
+        background-color: rgba(0, 245, 255, 0.03);
+    }
+
+    .retro-input::placeholder {
+        color: rgba(0, 245, 255, 0.3);
+    }
+
+    .genre-tag {
+        @apply text-xs tracking-widest uppercase px-3 py-1 border font-bold;
+        font-family: "Rajdhani", sans-serif;
+        color: #00f5ff;
+        border-color: rgba(0, 245, 255, 0.4);
+        background: rgba(0, 245, 255, 0.08);
+    }
+
+    .section-title {
+        @apply font-retro uppercase tracking-widest;
+        font-size: clamp(1.5rem, 4vw, 3rem);
+    }
+}

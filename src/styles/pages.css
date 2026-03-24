@@ -1,0 +1,6 @@
+    @layer components {
+    .section-title {
+        @apply font-retro font-black uppercase tracking-widest;
+        font-size: clamp(1.5rem, 4vw, 3rem);
+    }
+    }

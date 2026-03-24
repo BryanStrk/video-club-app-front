@@ -1,0 +1,55 @@
+{
+  "movies": [
+    {
+      "id": "1",
+      "titulo": "Blade Runner 2049",
+      "genero": "Ciencia Ficción",
+      "anio": 2017,
+      "sinopsis": "Un nuevo blade runner descubre un secreto enterrado durante mucho tiempo.",
+      "imagen_url": "/images/blade-runner-2049.jpg",
+      "director": "Denis Villeneuve",
+      "valoracion": 4.8
+    },
+    {
+      "id": "2",
+      "titulo": "Akira",
+      "genero": "Animación / Cyberpunk",
+      "anio": 1988,
+      "sinopsis": "Una historia de caos, poder y conspiración en Neo-Tokio.",
+      "imagen_url": "/images/akira.jpg",
+      "director": "Katsuhiro Otomo",
+      "valoracion": 4.9
+    },
+    {
+      "id": "3",
+      "titulo": "Tron: Legacy",
+      "genero": "Acción / Ciencia Ficción",
+      "anio": 2010,
+      "sinopsis": "El hijo de un programador entra al mundo digital de su padre.",
+      "imagen_url": "/images/tron-legacy.jpg",
+      "director": "Joseph Kosinski",
+      "valoracion": 4.2
+    },
+    {
+      "id": "4",
+      "titulo": "The Matrix",
+      "genero": "Acción / Cyberpunk",
+      "anio": 1999,
+      "sinopsis": "Un hacker descubre que la realidad es una simulación.",
+      "imagen_url": "/images/the-matrix.jpg",
+      "director": "Lana y Lilly Wachowski",
+      "valoracion": 5
+    },
+    {
+      "titulo": "Back to the Future",
+      "genero": "Ciencia ficción",
+      "anio": 1985,
+      "sinopsis": "Regreso al futuro es una película estadounidense dirigida por Robert Zemeckis que se estrenó en 1985. Escrita por Zemeckis y Bob Gale, producida por Steven Spielberg y protagonizada por Michael J. Fox, Christopher Lloyd, Lea Thompson, Crispin Glover y Thomas F. Wilson. ",
+      "imagen_url": "https://m.media-amazon.com/images/M/MV5BZmM3ZjE0NzctNjBiOC00MDZmLTgzMTUtNGVlOWFlOTNiZDJiXkEyXkFqcGc@._V1_.jpg",
+      "director": " Robert Zemeckis",
+      "valoracion": 4.8,
+      "id": "5b51"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}
