@@ -25,7 +25,7 @@
         setMovies(data)
         } catch (err) {
         console.error(err)
-        setError('Error al conectar con el servidor. ¿Está corriendo JSON Server en localhost:3000?')
+        setError('Error al conectar con el backend en http://localhost:8080/movies')
         } finally {
         setLoading(false)
         }
@@ -58,25 +58,25 @@
         }
     }
 
-    const dynamicGenres = [
-        'Todos',
-        ...new Set(
+const dynamicGenres = [
+    'Todos',
+    ...new Set(
         movies.flatMap((movie) =>
-            movie.genero.split('/').map((g) => g.trim())
+        (movie.genre || '').split('/').map((g) => g.trim()).filter(Boolean)
         )
-        ),
-    ]
+    ),
+]
 
     const filtered = movies.filter((m) => {
-        const matchSearch =
-        m.titulo.toLowerCase().includes(search.toLowerCase()) ||
+    const matchSearch =
+        (m.title && m.title.toLowerCase().includes(search.toLowerCase())) ||
         (m.director && m.director.toLowerCase().includes(search.toLowerCase()))
 
-        const matchGenre =
-        genreFilter === 'Todos' ||
-        m.genero.toLowerCase().includes(genreFilter.toLowerCase())
+    const matchGenre =
+    genreFilter === 'Todos' ||
+    (m.genre && m.genre.toLowerCase().includes(genreFilter.toLowerCase()))
 
-        return matchSearch && matchGenre
+    return matchSearch && matchGenre
     })
 
     return (

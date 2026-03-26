@@ -1,8 +1,7 @@
     import axios from 'axios'
 
-    const API_URL = 'http://localhost:3000/movies'
+    const API_URL = 'http://localhost:8080/movies'
 
-    // Instancia de Axios con configuración base
     const apiClient = axios.create({
     baseURL: API_URL,
     headers: {
@@ -12,7 +11,7 @@
 
     // GET - Obtener todas las películas
     export const getAllMovies = async () => {
-    const response = await apiClient.get('/')
+    const response = await apiClient.get('')   // ← sin slash
     return response.data
     }
 
@@ -24,7 +23,7 @@
 
     // POST - Crear nueva película
     export const createMovie = async (movieData) => {
-    const response = await apiClient.post('/', movieData)
+    const response = await apiClient.post('', movieData)  // ← sin slash
     return response.data
     }
 

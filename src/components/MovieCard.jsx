@@ -25,7 +25,7 @@ export function MovieCard({ movie, onEdit, onDelete }) {
   const [isDeleting, setIsDeleting] = useState(false)
 
   const handleDelete = async () => {
-    if (!window.confirm(`¿Eliminar "${movie.titulo}" del catálogo?`)) return
+    if (!window.confirm(`¿Eliminar "${movie.title}" del catálogo?`)) return
 
     try {
       setIsDeleting(true)
@@ -35,23 +35,20 @@ export function MovieCard({ movie, onEdit, onDelete }) {
     }
   }
 
-  const fallbackImage = `https://placehold.co/300x450/0a0a12/00f5ff?text=${encodeURIComponent(movie.titulo)}&font=monospace`
+  const fallbackImage = `https://placehold.co/300x450/0a0a12/00f5ff?text=${encodeURIComponent(movie.title || 'Movie')}&font=monospace`
 
   return (
     <article className="retro-card group animate-slide-in-up h-full flex flex-col">
-      {/* Poster */}
       <div className="relative overflow-hidden" style={{ aspectRatio: '2/3' }}>
         <img
-          src={imageError ? fallbackImage : movie.imagen_url}
-          alt={movie.titulo}
+          src={imageError ? fallbackImage : movie.imageUrl}
+          alt={movie.title}
           onError={() => setImageError(true)}
           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
         />
 
-        {/* Overlay gradient */}
         <div className="absolute inset-0 bg-linear-to-t from-dark-900 via-dark-900/20 to-transparent opacity-80 group-hover:opacity-60 transition-opacity duration-300" />
 
-        {/* Año badge */}
         <div
           className="absolute top-3 right-3 font-retro text-xs px-2 py-1"
           style={{
@@ -64,7 +61,6 @@ export function MovieCard({ movie, onEdit, onDelete }) {
           {movie.anio}
         </div>
 
-        {/* Scan line effect on hover */}
         <div
           className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300"
           style={{
@@ -74,15 +70,14 @@ export function MovieCard({ movie, onEdit, onDelete }) {
         />
       </div>
 
-      {/* Info */}
       <div className="p-4 space-y-2 flex flex-col flex-1">
-        <span className="genre-tag inline-block">{movie.genero}</span>
+        <span className="genre-tag inline-block">{movie.genre}</span>
 
         <h3
           className="font-retro font-bold text-sm leading-tight mt-2 group-hover:text-neon-cyan transition-colors duration-300 min-h-[40px] flex items-start"
           style={{ fontSize: '0.85rem', letterSpacing: '0.05em' }}
         >
-          {movie.titulo}
+          {movie.title}
         </h3>
 
         {movie.director && (
@@ -93,13 +88,13 @@ export function MovieCard({ movie, onEdit, onDelete }) {
         )}
 
         <p className="font-body text-xs text-gray-500 leading-relaxed line-clamp-3 min-h-[54px]">
-          {movie.sinopsis}
+          {movie.synopsis}
         </p>
 
-        {movie.valoracion != null && (
+        {movie.rating != null && (
           <div className="flex items-center gap-2 pt-1">
-            <StarRating value={Math.round(movie.valoracion)} />
-            <span className="font-retro text-xs text-gray-500">{movie.valoracion}</span>
+            <StarRating value={Math.round(movie.rating)} />
+            <span className="font-retro text-xs text-gray-500">{movie.rating}</span>
           </div>
         )}
 

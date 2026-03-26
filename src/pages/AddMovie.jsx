@@ -3,18 +3,18 @@
     import { createMovie } from '../services/movieService.js'
 
     const INITIAL_FORM = {
-    titulo: '',
-    genero: '',
+    title: '',
+    genre: '',
     anio: '',
-    sinopsis: '',
-    imagen_url: '',
+    synopsis: '',
+    imageUrl: '',
     director: '',
-    valoracion: '',
+    rating: '',
     }
 
     const FIELDS = [
     {
-        name: 'titulo',
+        name: 'title',
         label: 'Título',
         type: 'text',
         placeholder: 'Nombre de la película',
@@ -30,7 +30,7 @@
         col: 1,
     },
     {
-        name: 'genero',
+        name: 'genre',
         label: 'Género',
         type: 'text',
         placeholder: 'Ej: Ciencia Ficción / Acción',
@@ -46,7 +46,7 @@
         col: 1,
     },
     {
-        name: 'valoracion',
+        name: 'rating',
         label: 'Valoración (0-5)',
         type: 'number',
         placeholder: '4.5',
@@ -54,10 +54,10 @@
         col: 1,
     },
     {
-        name: 'imagen_url',
+        name: 'imageUrl',
         label: 'URL del Poster',
-        type: 'url',
-        placeholder: 'https://...',
+        type: 'text',
+        placeholder: '/images/default-movie.jpg',
         required: false,
         col: 2,
     },
@@ -76,30 +76,30 @@
     }
 
     const handleSubmit = async (e) => {
-    e.preventDefault()
-    setLoading(true)
-    setError(null)
+        e.preventDefault()
+        setLoading(true)
+        setError(null)
 
-    try {
+        try {
         await createMovie({
-        ...formData,
-        imagen_url: formData.imagen_url.trim() !== '' ? formData.imagen_url : '/images/default-movie.jpg',
-        anio: parseInt(formData.anio, 10),
-        valoracion: formData.valoracion !== '' ? parseFloat(formData.valoracion) : undefined,
+            ...formData,
+            imageUrl: formData.imageUrl.trim() !== '' ? formData.imageUrl : '/images/default-movie.jpg',
+            anio: parseInt(formData.anio, 10),
+            rating: formData.rating !== '' ? parseFloat(formData.rating) : undefined,
         })
 
         setSuccess(true)
         setFormData(INITIAL_FORM)
 
         setTimeout(() => {
-        navigate('/movies')
+            navigate('/movies')
         }, 1800)
-    } catch (err) {
+        } catch (err) {
         console.error(err)
-        setError('Error al guardar. ¿Está corriendo JSON Server?')
-    } finally {
+        setError('Error al guardar en el backend.')
+        } finally {
         setLoading(false)
-    }
+        }
     }
 
     return (
@@ -238,9 +238,9 @@
                         value={formData[name]}
                         onChange={handleChange}
                         required={required}
-                        min={name === 'anio' ? 1888 : name === 'valoracion' ? 0 : undefined}
-                        max={name === 'anio' ? 2099 : name === 'valoracion' ? 5 : undefined}
-                        step={name === 'valoracion' ? 0.1 : undefined}
+                        min={name === 'anio' ? 1888 : name === 'rating' ? 0 : undefined}
+                        max={name === 'anio' ? 2099 : name === 'rating' ? 5 : undefined}
+                        step={name === 'rating' ? 0.1 : undefined}
                         className="retro-input"
                         placeholder={placeholder}
                     />
@@ -257,8 +257,8 @@
                     </label>
 
                     <textarea
-                    name="sinopsis"
-                    value={formData.sinopsis}
+                    name="synopsis"
+                    value={formData.synopsis}
                     onChange={handleChange}
                     rows={4}
                     className="retro-input resize-none"

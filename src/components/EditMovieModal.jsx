@@ -2,26 +2,26 @@
 
     export function EditMovieModal({ movie, onClose, onSave }) {
     const [formData, setFormData] = useState({
-        titulo: '',
-        genero: '',
+        title: '',
+        genre: '',
         anio: '',
-        sinopsis: '',
-        imagen_url: '',
+        synopsis: '',
+        imageUrl: '',
         director: '',
-        valoracion: '',
+        rating: '',
     })
     const [loading, setLoading] = useState(false)
 
     useEffect(() => {
         if (movie) {
         setFormData({
-            titulo: movie.titulo || '',
-            genero: movie.genero || '',
+            title: movie.title || '',
+            genre: movie.genre || '',
             anio: movie.anio || '',
-            sinopsis: movie.sinopsis || '',
-            imagen_url: movie.imagen_url || '',
+            synopsis: movie.synopsis || '',
+            imageUrl: movie.imageUrl || '',
             director: movie.director || '',
-            valoracion: movie.valoracion || '',
+            rating: movie.rating || '',
         })
         }
     }, [movie])
@@ -39,7 +39,7 @@
         const payload = {
             ...formData,
             anio: parseInt(formData.anio, 10),
-            valoracion: formData.valoracion ? parseFloat(formData.valoracion) : undefined,
+            rating: formData.rating ? parseFloat(formData.rating) : undefined,
         }
 
         await onSave(movie.id, payload)
@@ -87,8 +87,8 @@
                 </label>
                 <input
                     type="text"
-                    name="titulo"
-                    value={formData.titulo}
+                    name="title"
+                    value={formData.title}
                     onChange={handleChange}
                     required
                     className="retro-input"
@@ -119,8 +119,8 @@
                 </label>
                 <input
                     type="number"
-                    name="valoracion"
-                    value={formData.valoracion}
+                    name="rating"
+                    value={formData.rating}
                     onChange={handleChange}
                     min="0"
                     max="5"
@@ -136,8 +136,8 @@
                 </label>
                 <input
                     type="text"
-                    name="genero"
-                    value={formData.genero}
+                    name="genre"
+                    value={formData.genre}
                     onChange={handleChange}
                     className="retro-input"
                     placeholder="Ciencia Ficción / Acción"
@@ -163,12 +163,12 @@
                     URL Imagen (Poster)
                 </label>
                 <input
-                    type="url"
-                    name="imagen_url"
-                    value={formData.imagen_url}
+                    type="text"
+                    name="imageUrl"
+                    value={formData.imageUrl}
                     onChange={handleChange}
                     className="retro-input"
-                    placeholder="https://..."
+                    placeholder="/images/akira.jpg"
                 />
                 </div>
 
@@ -177,8 +177,8 @@
                     Sinopsis
                 </label>
                 <textarea
-                    name="sinopsis"
-                    value={formData.sinopsis}
+                    name="synopsis"
+                    value={formData.synopsis}
                     onChange={handleChange}
                     rows={4}
                     className="retro-input resize-none"
