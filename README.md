@@ -86,7 +86,7 @@ Asegúrate de tener instalado en tu máquina:
 ### 1. Clona el repositorio
 
 ```bash
-git clone https://github.com/tu-usuario/video-club-app.git
+git clone https://github.com/BryanStrk/video-club-app-front.git
 cd video-club-app
 ```
 
@@ -125,9 +125,9 @@ La aplicación estará disponible en:
 
 | Script | Comando | Descripción |
 |---|---|---|
-| 🔧 **Desarrollo** | `npm run dev` | Inicia únicamente el servidor Vite con HMR |
-| 🗄️ **Servidor API** | `npm run server` | Inicia únicamente JSON Server en el puerto 3000 |
-| 🚀 **Full Stack** | `npm run dev:full` | Inicia **ambos** servicios en paralelo *(recomendado)* |
+| 🚀 **Full Stack (mock)** | `npm run dev:full` | Inicia **ambos** servicios en paralelo — frontend + JSON Server *(recomendado para desarrollo)* |
+| 🔧 **Solo frontend** | `npm run dev` | Inicia únicamente Vite con HMR — usar cuando el backend Spring Boot está corriendo en `:8080` |
+| 🗄️ **Solo API mock** | `npm run server` | Inicia únicamente JSON Server en el puerto `3000` |
 | 📦 **Build** | `npm run build` | Genera el bundle de producción optimizado en `/dist` |
 | 👁️ **Preview** | `npm run preview` | Sirve localmente el build de producción para revisión |
 | 🔍 **Lint** | `npm run lint` | Ejecuta ESLint sobre todos los archivos JS/JSX |
@@ -160,10 +160,10 @@ video-club-app/
 │   │   ├── effects.css          # Efectos neon, glitch, grid cyberpunk
 │   │   └── pages.css            # Estilos específicos de página
 │   ├── App.jsx              # Componente raíz y definición de rutas
-│   ├── index.css            # Entry point de estilos (imports + @theme)
+│   ├── index.css            # Entry point de estilos (@import "tailwindcss")
 │   └── main.jsx             # Entry point de React con BrowserRouter
 ├── db.json                  # Base de datos de películas (JSON Server)
-├── vite.config.js           # Configuración de Vite + Tailwind plugin
+├── vite.config.js           # Configuración de Vite + Tailwind plugin + proxy
 ├── eslint.config.js         # Configuración de ESLint
 └── package.json             # Dependencias y scripts
 ```
@@ -198,16 +198,57 @@ JSON Server expone automáticamente una API REST completa sobre `db.json`:
 
 ---
 
+## 🔗 Conexión con el backend real (Spring Boot)
+
+Por defecto la app usa **JSON Server** como mock de desarrollo. Para conectar con el backend Spring Boot real:
+
+### 1. Arranca el backend
+
+Asegúrate de que Spring Boot está corriendo en el puerto `8080`.
+
+> El backend requiere **Java 25** y **Spring Boot 4.0.4**.  
+> Repositorio: [video-club-app-back](https://github.com/BryanStrk/video-club-app-back)
+
+### 2. Cambia el proxy en `vite.config.js`
+
+```js
+server: {
+  proxy: {
+    '/api': {
+      target: 'http://localhost:8080',  // ← Spring Boot real
+      changeOrigin: true,
+      // Sin rewrite: Spring Boot ya gestiona el prefijo /api
+    }
+  }
+}
+```
+
+### 3. Lanza solo el frontend
+
+```bash
+npm run dev
+```
+
+> En producción, Nginx actúa como reverse proxy y redirige `/api/**` al contenedor de Spring Boot. No se necesita configuración adicional en el frontend.
+
+---
+
 ## 🐛 Solución de problemas comunes
 
 **`Error al conectar con el servidor`**
-→ Verifica que JSON Server esté corriendo: `npm run server`. Si usas `npm run dev` solo, la API no estará disponible.
+→ Verifica que JSON Server esté corriendo: `npm run server`. Si usas solo `npm run dev`, la API mock no estará disponible.
 
 **`Cannot find module` al instalar**
 → Asegúrate de usar Node.js 22+. Ejecuta `node --version` para comprobarlo.
 
 **Las imágenes no cargan**
 → Las películas de ejemplo usan rutas relativas (`/images/...`) o URLs externas. Si una imagen falla, se muestra automáticamente un placeholder generado con el título.
+
+**`401 Unauthorized` al llamar al backend real**
+→ Verifica que el token JWT esté almacenado en `localStorage` con la clave `token`. El interceptor de Axios lo adjunta automáticamente en cada petición.
+
+**`non-fast-forward` al hacer `git push`**
+→ El remoto tiene commits que tu local no tiene. Ejecuta `git pull --rebase origin main` y luego vuelve a hacer `git push`.
 
 ---
 
