@@ -22,10 +22,10 @@
         setLoading(true)
         setError(null)
         const data = await getAllMovies()
-        setMovies(data)
+        setMovies(Array.isArray(data) ? data : [])
         } catch (err) {
         console.error(err)
-        setError('Error al conectar con el backend en http://localhost:8080/movies')
+        setError('Error al cargar el catálogo desde el backend')
         } finally {
         setLoading(false)
         }
@@ -58,14 +58,14 @@
         }
     }
 
-const dynamicGenres = [
+    const dynamicGenres = [
     'Todos',
     ...new Set(
-        movies.flatMap((movie) =>
+        (Array.isArray(movies) ? movies : []).flatMap((movie) =>
         (movie.genre || '').split('/').map((g) => g.trim()).filter(Boolean)
         )
     ),
-]
+    ]
 
     const filtered = movies.filter((m) => {
     const matchSearch =
