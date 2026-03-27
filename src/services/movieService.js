@@ -1,7 +1,7 @@
     import axios from 'axios'
 
    // const API_URL = 'http://localhost:8080/movies'
-    const API_URL = 'http://217.154.181.229/api/movies'
+    const API_URL = '/api/movies'
 
     const apiClient = axios.create({
     baseURL: API_URL,
@@ -12,7 +12,7 @@
 
     // GET - Obtener todas las películas
     export const getAllMovies = async () => {
-    const response = await apiClient.get('')   // ← sin slash
+    const response = await apiClient.get('')   // sin slash
     return response.data
     }
 
