@@ -1,6 +1,7 @@
     import axios from 'axios'
 
-    const API_URL = 'http://localhost:8080/movies'
+   // const API_URL = 'http://localhost:8080/movies'
+    const API_URL = '/api/movies'
 
     const apiClient = axios.create({
     baseURL: API_URL,
